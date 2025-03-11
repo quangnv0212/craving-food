@@ -1,3 +1,6 @@
+import AppProvider from '@/components/providers/app-provider';
+import DashBoardLayoutProvider from '@/components/providers/dashboard-layout-provider';
+import { ThemeProvider } from '@/components/providers/theme-provider';
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import './globals.css';
@@ -19,8 +22,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${poppins.variable} antialiased`}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${poppins.variable} antialiased`}>
+        <AppProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <DashBoardLayoutProvider>{children}</DashBoardLayoutProvider>
+          </ThemeProvider>
+        </AppProvider>
+      </body>
     </html>
   );
 }
