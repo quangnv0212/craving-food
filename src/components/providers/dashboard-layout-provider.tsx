@@ -1,12 +1,10 @@
 'use client';
-import React from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
+import React from 'react';
 
-import { cn } from '@/lib/utils';
-
-import { SidebarProvider, SidebarTrigger } from '../ui/sidebar';
 import { AppSidebar } from '../nav/app-sidebar';
+import { SidebarProvider, SidebarTrigger } from '../ui/sidebar';
 
 const queryClient = new QueryClient();
 const DashBoardLayoutProvider = ({
@@ -18,9 +16,9 @@ const DashBoardLayoutProvider = ({
     <>
       <QueryClientProvider client={queryClient}>
         <SidebarProvider>
-          <AppSidebar />
-          <SidebarTrigger />
-          <div className={cn('layout-padding page-min-height px-6 pt-6')}>
+          <div className="flex w-full">
+            <AppSidebar />
+            <SidebarTrigger />
             <LayoutWrapper>{children}</LayoutWrapper>
           </div>
         </SidebarProvider>
@@ -35,6 +33,7 @@ const LayoutWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <motion.div
+        className="flex-1"
         initial="pageInitial"
         animate="pageAnimate"
         exit="pageExit"

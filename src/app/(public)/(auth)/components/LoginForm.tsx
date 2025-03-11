@@ -18,57 +18,62 @@ export default function LoginForm() {
     console.log(data);
   };
   return (
-    <div className="font-sans">
-      <h1 className="font-sans text-2xl font-bold">Login</h1>
+    <div className="flex h-screen flex-col items-center justify-center gap-4">
+      <h1 className="text-2xl font-bold">Login</h1>
       <Form {...form}>
         <form
-          className="w-full max-w-[600px] flex-shrink-0 space-y-2 font-sans"
+          className="flex flex-col gap-4"
           noValidate
           onSubmit={form.handleSubmit(onSubmit, err => {
             console.log(err);
           })}
         >
-          <div className="grid gap-4">
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field, formState: { errors } }) => (
-                <FormItem>
-                  <div className="grid gap-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="m@example.com"
-                      required
-                      {...field}
-                    />
-                    <FormMessage>{errors.email?.message as string}</FormMessage>
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field, formState: { errors } }) => (
+              <FormItem>
+                <div className="flex flex-col gap-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    className="w-full"
+                    id="email"
+                    type="email"
+                    placeholder="m@example.com"
+                    required
+                    {...field}
+                  />
+                  <FormMessage>{errors.email?.message as string}</FormMessage>
+                </div>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="password"
+            render={({ field, formState: { errors } }) => (
+              <FormItem>
+                <div className="flex flex-col gap-2">
+                  <div className="flex items-center">
+                    <Label htmlFor="password">Password</Label>
                   </div>
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field, formState: { errors } }) => (
-                <FormItem>
-                  <div className="grid gap-2">
-                    <div className="flex items-center">
-                      <Label htmlFor="password">Password</Label>
-                    </div>
-                    <Input id="password" type="password" required {...field} />
-                    <FormMessage>
-                      {errors.password?.message as string}
-                    </FormMessage>
-                  </div>
-                </FormItem>
-              )}
-            />
-            <Button type="submit" className="btn btn-primary w-full">
-              Login
-            </Button>
-          </div>
+                  <Input
+                    className="w-full"
+                    id="password"
+                    type="password"
+                    required
+                    {...field}
+                  />
+                  <FormMessage>
+                    {errors.password?.message as string}
+                  </FormMessage>
+                </div>
+              </FormItem>
+            )}
+          />
+          <Button type="submit" className="btn btn-primary w-full">
+            Login
+          </Button>
         </form>
       </Form>
     </div>
